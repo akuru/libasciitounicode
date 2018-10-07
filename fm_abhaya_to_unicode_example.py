@@ -1,6 +1,13 @@
 from libasciitounicode.converter import Font, to_unicode
+from libasciitounicode.file_proc import Doc
 import sys
 
-sentence = sys.argv[1]
+file_location = sys.argv[1]
 
-print(to_unicode(Font("abhaya", "sinhala", filepath="tests/fm_abhaya.yaml"), sentence))
+font = Font("abhaya", "sinhala", yaml_filepath="tests/fm_abhaya.yaml")
+doc = Doc(file_location)
+content = doc.get_content()
+
+converted_text = to_unicode(font, *content)
+
+print(converted_text)
